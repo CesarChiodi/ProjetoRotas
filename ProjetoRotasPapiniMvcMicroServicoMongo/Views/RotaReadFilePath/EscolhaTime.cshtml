@@ -1,0 +1,25 @@
+﻿@model ProjetoRotasPapiniMvcMicroServicoMongo.Models.Time
+
+@{
+	ViewData["Title"] = "EscolhaTime";
+}
+
+<h1>EscolhaTime</h1>
+
+<h4>Time</h4>
+<hr />
+<table class="table">
+	<tbody>
+		@foreach (var team in ViewBag.Time)
+		{
+			<tr>
+				<td>
+					<input type="checkbox" id="Time" name="Time" value=@team.NomeTime>
+					<label for="@team.NomeTime"> @team.NomeTime</label>
+					<br />
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+

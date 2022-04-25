@@ -1,0 +1,60 @@
+﻿@model ProjetoRotasPapiniMvcMicroServicoMongo.Models.Time
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Time</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="NomeTime" class="control-label"></label>
+                <input asp-for="NomeTime" class="form-control" />
+                <span asp-validation-for="NomeTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+               <p><label asp-for="PessoaTime" class="control-label"></label></p>
+
+				@{
+					foreach (var pessoa in ViewBag.Pessoa)
+					{
+						<input type="checkbox" id="Pessoa" name="Pessoa" value=@pessoa.Id>
+
+						<label for="@pessoa.NomePessoa"> @pessoa.NomePessoa</label>
+
+						<br />
+					}
+				}
+			</div>
+			<div class="form-group">
+				<p><label asp-for="Cidade" class="control-label"></label></p>
+				<select asp-for="Cidade" id="Cidade">
+
+					@{
+						foreach (var cidade in ViewBag.Cidade)
+						{
+							<option value="@cidade.Id"> @cidade.NomeCidade @cidade.Estado</option>
+						}
+					}
+				</select>
+			</div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

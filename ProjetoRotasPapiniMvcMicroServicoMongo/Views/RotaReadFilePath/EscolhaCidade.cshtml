@@ -1,0 +1,21 @@
+﻿@{
+	ViewData["Title"] = "EscolhaCidade";
+}
+
+<h1>EscolhaCidade</h1>
+
+<table class="table">
+	<tbody>
+		@foreach (var cidade in ViewBag.Cidade)
+		{
+			<tr>
+				<td>
+					<label for="@cidade"> @cidade</label>
+				</td>
+				<td>
+					<a asp-action="EscolhaTime" asp-route-city="@cidade" asp-route-service="@ViewBag.Servico">Select</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

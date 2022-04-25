@@ -1,0 +1,25 @@
+﻿@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<table class="table">
+	<form asp-action="EscolhaServico">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<div class="form-group">
+				<label class="control-label"></label><br />
+				@{
+					foreach (var column in ViewBag.Cabecalho)
+					{
+							<input type="checkbox" id="Column" name="Column" value=@column>
+							<label for="@column">@column</label>
+							<br/>
+					}
+				}
+		</div>
+		<div class="form-group">
+			<a asp-action="EscolhaServico"></a>
+			<input type="submit" value="EscolhaServico" onclick="EscolhaServico()" class="btn btn-primary" />
+		</div>
+	</form>
+</table>

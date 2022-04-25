@@ -1,0 +1,43 @@
+﻿@model ProjetoRotasPapiniMvcMicroServicoMongo.Models.Time
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Time</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NomeTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NomeTime)
+        </dd>
+        <dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Cidade)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Cidade.Id) -
+			@Html.DisplayFor(model => model.Cidade.Estado)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.PessoaTime)
+		</dt>
+        <dd class="col-sm-10">
+			@{
+				foreach (var pessoaTime in Model.PessoaTime)
+				{
+					@Html.DisplayFor(model => pessoaTime.NomePessoa)
+					<br />
+				}
+			}
+		</dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
