@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,6 +12,7 @@ using ProjetoRotasPapiniMvcMicroServicoMongo.Models;
 
 namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -22,8 +24,17 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
             _hostEnvironment = hostEnvironment;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var usuario = await Servico.VerificaUsuario.EncontraTodosUsuarios();
+            if(usuario.Count < 1)
+            {
+                Servico.VerificaUsuario.GerarUsuario(new Usuario { NomeUsuario = "admin", Senha = "admin",  Role = "admin" });
+                ViewBag.Usuario = "admin";
+                ViewBag.Role="admin";
+                ViewBag.Authenticate = true;
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
             return View();
         }
 
@@ -40,6 +51,28 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
 
         public IActionResult ReceberArquivo()
         {
+            string user = "Anonymous";
+            bool authenticate = false;
+
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                user = HttpContext.User.Identity.Name;
+                authenticate = true;
+
+                if (HttpContext.User.IsInRole("admin"))
+                    ViewBag.Role = "admin";
+                else
+                    ViewBag.Role = "usuario";
+            }
+            else
+            {
+                user = "Não Logado";
+                authenticate = false;
+                ViewBag.Role = "";
+            }
+
+            ViewBag.Usuario = user;
+            ViewBag.Authenticate = authenticate;
             return View();
         }
 
@@ -52,7 +85,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
                 string wwwRootPath = _hostEnvironment.WebRootPath;
                 string nomeArquivo = Path.GetFileNameWithoutExtension(arquivo.File.FileName);
                 string extension = Path.GetExtension(arquivo.File.FileName);
-                arquivo.FileName = nomeArquivo = nomeArquivo + DateTime.Now.ToString("yymmssfff") + extension;
+                arquivo.FileName = nomeArquivo = nomeArquivo + extension;
                 string path = Path.Combine(wwwRootPath + "/file", nomeArquivo);
 
                 using (var fileStream = new FileStream(path, FileMode.Create))

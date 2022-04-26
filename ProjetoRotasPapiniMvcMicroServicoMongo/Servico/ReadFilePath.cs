@@ -6,11 +6,11 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
 {
     public class ReadFilePath
     {
-        public static List<string> LerCabecalho(string caminhoWebRoot)
+        public static List<string> LerCabecalho(string caminhoRoot)
         {
             List<string> cabecalho = new List<string>();
 
-            FileInfo existingFile = new FileInfo(caminhoWebRoot + "\\file\\Gerador.de.Rotas.xlsx");
+            FileInfo existingFile = new FileInfo(caminhoRoot + "\\file\\Gerador.de.Rotas.xlsx");
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             using (ExcelPackage package = new ExcelPackage(existingFile))

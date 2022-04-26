@@ -2,7 +2,24 @@
 	ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Rotas do Relatorio</h1>
+@if (!ViewBag.Authenticate)
+{
+	<div class="row">
+		<div class="col-md-12">
+			<span>Nao Logado</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<form method="post" asp-controller="Usuario" asp-action="Index">
+				<input type="submit" value="Entrar" class="btn btn-primary" />
+			</form>
+		</div>
+	</div>
+}
+else
+{
 <table class="table">
 	<form asp-action="EscolhaServico">
 		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -23,3 +40,4 @@
 		</div>
 	</form>
 </table>
+}

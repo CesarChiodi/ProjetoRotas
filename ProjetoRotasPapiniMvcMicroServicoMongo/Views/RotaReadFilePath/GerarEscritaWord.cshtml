@@ -1,0 +1,18 @@
+﻿@{
+	ViewData["Titulo"] = "GerarEscritaWord";
+}
+<h1>GerarEscritaWord</h1>
+
+<hr />
+<div class="row">
+	<div class="col-md-10">
+		<p>ArquivoCarregado</p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-10 p-0">
+		<form asp-controller="RotaReadFilePath" asp-action="Download">
+			<input class="btn btn-link" type="submit" value="Dawnload" />
+		</form>
+	</div>
+</div>

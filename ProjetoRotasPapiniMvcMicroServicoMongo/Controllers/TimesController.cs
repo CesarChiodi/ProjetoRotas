@@ -2,26 +2,42 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ProjetoRotasPapiniMvcMicroServicoMongo.Data;
 using ProjetoRotasPapiniMvcMicroServicoMongo.Models;
 
 namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
 {
+        [Authorize]
     public class TimesController : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public TimesController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
         // GET: Times
         public async Task<IActionResult> Index()
         {
+            string user = "Anonymous";
+            bool authenticate = false;
+
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                user = HttpContext.User.Identity.Name;
+                authenticate = true;
+
+                if (HttpContext.User.IsInRole("admin"))
+                    ViewBag.Role = "admin";
+                else
+                    ViewBag.Role = "usuario";
+            }
+            else
+            {
+                user = "Não Logado";
+                authenticate = false;
+                ViewBag.Role = "";
+            }
+
+            ViewBag.Usuario = user;
+            ViewBag.Authenticate = authenticate;
             return View(await Servico.VerificaTime.EncontraTodosTimes());
         }
 

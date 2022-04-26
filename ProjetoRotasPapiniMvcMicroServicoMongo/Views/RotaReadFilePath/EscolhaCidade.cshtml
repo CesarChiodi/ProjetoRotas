@@ -5,17 +5,32 @@
 <h1>EscolhaCidade</h1>
 
 <table class="table">
-	<tbody>
-		@foreach (var cidade in ViewBag.Cidade)
-		{
-			<tr>
-				<td>
-					<label for="@cidade"> @cidade</label>
-				</td>
-				<td>
-					<a asp-action="EscolhaTime" asp-route-city="@cidade" asp-route-service="@ViewBag.Servico">Select</a>
-				</td>
-			</tr>
-		}
-	</tbody>
+	<form asp-action="EscolhaTime">
+		<div class="form-group">
+
+			@foreach (var cabecalho in ViewBag.Cabecalho)
+			{
+				<input type="hidden" value="@cabecalho" for="@cabecalho" id="cabecalho" name="cabecalho" />
+			}
+		</div>
+		<div class="form-group">
+			@foreach (var servico in ViewBag.Servico)
+			{
+				<input type="hidden" value="@servico" for="@servico" id="servico" name="servico" />
+			}
+		</div>
+		<div class="form-group">
+
+			@foreach (var cidade in ViewBag.Cidade)
+			{
+				<label value="@cidade" for="@cidade" id="cidade" name="cidade">@cidade</label>
+				<input type="radio" value="@cidade" for="@cidade" id="cidade" name="cidade" />
+				<br />
+			}
+			<div class="form-group">
+				<input type="submit" value="Continuar" class="btn btn-primary" />
+			</div>
+		</div>
+	</form>
 </table>
+

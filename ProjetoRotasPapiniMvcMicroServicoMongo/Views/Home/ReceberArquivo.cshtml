@@ -1,36 +1,56 @@
 ﻿@model ProjetoRotasPapiniMvcMicroServicoMongo.Models.Arquivo
 
 @{
-    ViewData["Title"] = "ReceberArquivo";
+	ViewData["Title"] = "ReceberArquivo";
 }
 
-<h1>File</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="ReceberArquivo" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FileName" class="control-label"></label>
-                <input asp-for="FileName" class="form-control" required/>
-                <span asp-validation-for="FileName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="File" class="control-label"></label>
-                <input asp-for="File" class="form-control" required/>
-                <span asp-validation-for="File" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="ReceberArquivo" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<h1>Arquivo</h1>
+@if (!ViewBag.Authenticate)
+{
+	<div class="row">
+		<div class="col-md-12">
+			<span>Nao Logado</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<form method="post" asp-controller="Usuario" asp-action="Index">
+				<input type="submit" value="Entrar" class="btn btn-primary" />
+			</form>
+		</div>
+	</div>
+}
+else
+{
+	<hr />
+	<div class="row">
+		<div class="col-md-4">
+			<form asp-action="ReceberArquivo" enctype="multipart/form-data">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<div class="form-group">
+					<label asp-for="FileName" class="control-label"></label>
+					<input asp-for="FileName" class="form-control" required />
+					<span asp-validation-for="FileName" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="File" class="control-label"></label>
+					<input asp-for="File" class="form-control" required />
+					<span asp-validation-for="File" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="ReceberArquivo" class="btn btn-primary" />
+				</div>
+			</form>
+		</div>
+	</div>
 
-<div>
-    <a asp-action="Index">Home</a>
-</div>
+	<div>
+		<a asp-action="Index">Home</a>
+	</div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@section Scripts {
+    @{
+	await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
 }

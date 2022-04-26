@@ -6,25 +6,26 @@
 
 <table class="table">
 	<form asp-action="EscolhaCidade">
+		<div class="form-group">
 
-		@{
-			List<string> cabecalho = new();
-		}
-		@foreach (var servico in ViewBag.Servico)
-		{
-		<tr>
-			<td>
-				<label for="@servico"> @servico</label>
-			</td>
-				@foreach (var cabecalhos in ViewBag.CabecalhoEscolhido)
-				{
-					cabecalho.Add(cabecalhos);
-				}
-				<td>
-					<a asp-action="EscolhaCidade" asp-route-service="@servico" asp-route-headers="@cabecalho.Find(x => x == "CIDADE")">Select</a>
-				</td>
-				
-		</tr>
-		}
+			@foreach (var cabecalho in ViewBag.CabecalhoEscolhido)
+			{
+				<input type="hidden" value="@cabecalho" for="@cabecalho" id="cabecalho" name="cabecalho" />
+			}
+
+		</div>
+		<div class="form-group">
+			@foreach (var servico in ViewBag.Servico)
+			{
+				<label value="@servico" for="@servico" id="servico" name="servico">@servico</label>
+				<input type="hidden" value="@servico" for="@servico" id="servico" name="servico" />
+				<br/>
+			}
+				<div class="form-group">
+					<input type="submit" value="EscolhaCidade" class="btn btn-primary" />
+				</div>
+
+
+		</div>
 	</form>
 </table>

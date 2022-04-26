@@ -1,64 +1,82 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ProjetoRotasPapiniMvcMicroServicoMongo</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - ProjetoRotasPapiniMvcMicroServicoMongo</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ProjetoRotasPapiniMvcMicroServicoMongo</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Pessoas" asp-action="Index">Pessoa</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cidades" asp-action="Index">Cidade</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Times" asp-action="Index">Time</a>
-                        </li>
-                        <li class="nav-item">
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+			<div class="container">
+				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ProjetoRotasPapiniMvcMicroServicoMongo</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+					<ul class="navbar-nav flex-grow-1">
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Pessoas" asp-action="Index">Pessoa</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Cidades" asp-action="Index">Cidade</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Times" asp-action="Index">Time</a>
+						</li>
+						<li class="nav-item">
 							<a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Usuario</a>
 						</li>
-                        <li class="nav-item">
+						<li class="nav-item">
 							<a class="nav-link text-dark" asp-area="" asp-controller="RotaReadFilePath" asp-action="Index">Rota</a>
 						</li>
-                    </ul>
-@*                    <partial name="_LoginPartial" />*@
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+					</ul>
+					@*                    <partial name="_LoginPartial" />*@
+				</div>
+			</div>
+			@if (string.IsNullOrEmpty(@ViewBag.Role))
+			{
+				<div class="col-2 text-center">
+					<strong>Usuario Restrito</strong>
+					<form method="post" asp-controller="Usuario" asp-action="Index">
+						<input class="btn btn-link text-dark" type="submit" value="Entrar" />
+					</form>
+				</div>
+			}
+			else
+			{
+				<div class="col-2 text-center">
+					Olá, <strong>@ViewBag.Usuario!</strong>
+					<form method="post" asp-controller="Usuario" asp-action="Logout">
+						<u><input class="btn btn-link text-dark" type="submit" value="Sair?" /></u>
+					</form>
+				</div>
+			}
+		</nav>
+	</header>
+	<div class="container">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - ProjetoRotasPapiniMvcMicroServicoMongo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+	<footer class="border-top footer text-muted">
+		<div class="container">
+			&copy; 2022 - ProjetoRotasPapiniMvcMicroServicoMongo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+		</div>
+	</footer>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
