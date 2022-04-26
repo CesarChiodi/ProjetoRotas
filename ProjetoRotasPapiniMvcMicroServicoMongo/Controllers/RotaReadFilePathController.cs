@@ -141,7 +141,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
             var cidade = cidadeEscolhida.Replace(",", "");
 
             new EscreverFilePath().EscreverWord(cabecalhoEscolhido, listaTimes, servico, cidade, _appEnvironment.WebRootPath);
-            return RedirectToAction(nameof(Index));
+            return View();
         }
 
         public FileResult Download()

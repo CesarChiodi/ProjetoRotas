@@ -38,6 +38,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
             List<string> outrosObjetos = new();
             string os = "", baseBase = "", cep = "", endereco = "", numero = "", bairro = "", complemento = "";
             int count = 0;
+            int contTime = 0;
             string path = caminhoRoot + "\\file\\RotasGeradas.docx";
 
             using (StreamWriter streamwriter = new StreamWriter(path, false, Encoding.GetEncoding("iso-8859-1")))
@@ -80,7 +81,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
                         }
                     }
 
-                    while (count < servicoParaCadaTime)
+                    if (count < servicoParaCadaTime)
                     {
                         string linha = "";
                         string outraString = "";
@@ -89,14 +90,14 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
                         {
                             outraString = outraString + outro;
                         }
-                       
-                        linha = "ROTAS" + DateTime.Now.ToShortDateString() + $"\n\nSERVIÇO: {servico}" + $"\n\nTIME: {listaTimes[count]} " + $"\n\nCIDADE: {cidade}" + $"\n{baseBase}" + $"\n\n{endereco}, \n{numero}   {cep}" + $"\n\n{bairro}, \n{complemento}" + $"\n{outraString}\n_-_-_-";
+
+                        linha = DateTime.Now.ToShortDateString() + "ROTAS: " + $"\n\nOS: {os}" + $"\n\nSERVIÇO: {servico}" + $"\n\nTIME: {listaTimes[contTime]} " + $"\n\nCIDADE: {cidade}" + $"\n{baseBase}" + $"\n\n{endereco}, \n{numero}   {cep}" + $"\n\n{bairro} \n{complemento}" + $"\n{outraString}\n_-_-_-\n";
 
                         count++;
-                        if (count < listaTimes.Count - 1 && count == 21)
+                        if (contTime < listaTimes.Count - 1 && count == servicoParaCadaTime)
                         {
                             count = 0;
-                            count++;
+                            contTime++;
                         }
 
                         streamwriter.WriteLine(linha);
