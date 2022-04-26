@@ -98,6 +98,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
                             count = 0;
                             count++;
                         }
+
                         streamwriter.WriteLine(linha);
                     }
                 }
