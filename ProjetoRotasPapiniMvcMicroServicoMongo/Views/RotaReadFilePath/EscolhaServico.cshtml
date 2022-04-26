@@ -1,5 +1,5 @@
 ﻿@{
-	ViewData["Title"] = "EscolhaServco";
+	ViewData["Title"] = "EscolhaServico";
 }
 
 <h1>EscolhaServco</h1>
@@ -8,7 +8,7 @@
 	<form asp-action="EscolhaCidade">
 		<div class="form-group">
 
-			@foreach (var cabecalho in ViewBag.CabecalhoEscolhido)
+			@foreach (var cabecalho in ViewBag.Cabecalho)
 			{
 				<input type="hidden" value="@cabecalho" for="@cabecalho" id="cabecalho" name="cabecalho" />
 			}
@@ -18,7 +18,7 @@
 			@foreach (var servico in ViewBag.Servico)
 			{
 				<label value="@servico" for="@servico" id="servico" name="servico">@servico</label>
-				<input type="hidden" value="@servico" for="@servico" id="servico" name="servico" />
+				<input type="hidden""checkbox" value="@servico" for="@servico" id="servico" name="servico" />
 				<br/>
 			}
 				<div class="form-group">

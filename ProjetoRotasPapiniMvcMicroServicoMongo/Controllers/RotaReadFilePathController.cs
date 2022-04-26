@@ -66,7 +66,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
             }
 
             ViewBag.Servico = servicos.Distinct().ToList();
-            ViewBag.CabecalhoEscolhido = listaCabecalho;
+            ViewBag.Cabecalho = listaCabecalho;
             return View();
         }
 
