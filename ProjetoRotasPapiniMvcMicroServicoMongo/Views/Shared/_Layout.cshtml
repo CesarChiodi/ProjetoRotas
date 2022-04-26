@@ -34,10 +34,10 @@
 							<a class="nav-link text-dark" asp-area="" asp-controller="Times" asp-action="Index">Time</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Usuario</a>
+							<a class="nav-link text-dark" asp-area="" asp-controller="RotaReadFilePath" asp-action="Index">Rota</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="RotaReadFilePath" asp-action="Index">Rota</a>
+							<a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Usuario</a>
 						</li>
 					</ul>
 					@*                    <partial name="_LoginPartial" />*@
@@ -57,7 +57,7 @@
 				<div class="col-2 text-center">
 					Olá, <strong>@ViewBag.Usuario!</strong>
 					<form method="post" asp-controller="Usuario" asp-action="Logout">
-						<u><input class="btn btn-link text-dark" type="submit" value="Sair?" /></u>
+						<u><input class="btn btn-link text-dark" type="submit" value="Sair" /></u>
 					</form>
 				</div>
 			}

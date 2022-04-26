@@ -9,17 +9,36 @@
 <h3>Time</h3>
 <hr />
 <table class="table">
-	<tbody>
-		@foreach (var team in ViewBag.Time)
-		{
-			<tr>
-				<td>
-					<input type="checkbox" id="Time" name="Time" value=@team.NomeTime>
-					<label for="@team.NomeTime"> @team.NomeTime</label>
-					<br />
-				</td>
-			</tr>
-		}
-	</tbody>
+	<form asp-action="GerarEscritaWord">
+		<div class="form-group">
+			@foreach (var time in ViewBag.Time)
+			{
+				<input type="checkbox" id="time" name="time" value=@time.NomeTime>
+				<label for="@time.NomeTime"> @time.NomeTime </label>
+				<br />
+			}
+		</div>
+		<div class="form-group">
+			@foreach (var cabecalho in ViewBag.Cabecalho)
+			{
+				<input type="hidden" value="@cabecalho" for="@cabecalho" id="cabecalho" name="cabecalho" />
+			}
+		</div>
+		<div class="form-group">
+			@foreach (var servico in ViewBag.Servico)
+			{
+				<input type="hidden" value="@servico" for="@servico" id="servico" name="servico" />
+			}
+		</div>
+		<div class="form-group">
+			@foreach (var cidade in ViewBag.Cidade)
+			{
+				<input type="hidden" value="@cidade" for="@cidade" id="cidade" name="cidade" />
+			}
+		</div>
+		<div class="form-group">
+			<input type="submit" value="Criar" class="btn btn-primary" />
+		</div>
+	</form>
 </table>
 
