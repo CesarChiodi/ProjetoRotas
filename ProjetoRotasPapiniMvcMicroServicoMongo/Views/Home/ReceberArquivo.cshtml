@@ -27,11 +27,7 @@ else
 		<div class="col-md-4">
 			<form asp-action="ReceberArquivo" enctype="multipart/form-data">
 				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-				<div class="form-group">
-					<label asp-for="FileName" class="control-label"></label>
-					<input asp-for="FileName" class="form-control" required />
-					<span asp-validation-for="FileName" class="text-danger"></span>
-				</div>
+				
 				<div class="form-group">
 					<label asp-for="File" class="control-label"></label>
 					<input asp-for="File" class="form-control" required />

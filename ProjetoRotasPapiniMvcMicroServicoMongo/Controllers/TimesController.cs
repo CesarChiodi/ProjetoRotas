@@ -44,6 +44,12 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         // GET: Times/Details/5
         public async Task<IActionResult> Details(string id)
         {
+            ViewBag.Usuario = HttpContext.User.Identity.Name;
+            if (HttpContext.User.IsInRole("admin"))
+                ViewBag.Role = "admin";
+            else
+                ViewBag.Role = "usuario";
+
             if (id == null)
             {
                 return NotFound();
@@ -61,6 +67,12 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         // GET: Times/Create
         public async Task<IActionResult> Create()
         {
+            ViewBag.Usuario = HttpContext.User.Identity.Name;
+            if (HttpContext.User.IsInRole("admin"))
+                ViewBag.Role = "admin";
+            else
+                ViewBag.Role = "usuario";
+
             List<Pessoa> pessoasCadastradas = await Servico.VerificaPessoa.EncontraTodasPessoa();
             List<Time> listaTimes = await Servico.VerificaTime.EncontraTodosTimes();
 
@@ -97,6 +109,8 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NomeTime")] Time time)
         {
+
+
             string cidade = Request.Form["Cidade"].ToString();
             time.Cidade = await Servico.VerificaCidade.EncontraCidadeUnica(cidade);
 
@@ -122,6 +136,12 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         // GET: Times/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
+            ViewBag.Usuario = HttpContext.User.Identity.Name;
+            if (HttpContext.User.IsInRole("admin"))
+                ViewBag.Role = "admin";
+            else
+                ViewBag.Role = "usuario";
+
             if (id == null)
             {
                 return NotFound();
@@ -232,6 +252,12 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         // GET: Times/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
+            ViewBag.Usuario = HttpContext.User.Identity.Name;
+            if (HttpContext.User.IsInRole("admin"))
+                ViewBag.Role = "admin";
+            else
+                ViewBag.Role = "usuario";
+
             if (id == null)
             {
                 return NotFound();

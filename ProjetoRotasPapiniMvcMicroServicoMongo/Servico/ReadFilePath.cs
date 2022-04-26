@@ -18,7 +18,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
                 ExcelWorksheet worksheet = package.Workbook.Worksheets[PositionID: 0];
                 int columnCount = worksheet.Dimension.End.Column;
 
-                for (int coluna = 1; coluna < columnCount; coluna++)
+                for (int coluna = 1; coluna < columnCount + 1; coluna++)
                 {
                     cabecalho.Add(worksheet?.Cells[Row: 1, coluna]?.Value?.ToString());
                 }
@@ -90,7 +90,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
                 int numeroColunas = worksheet.Dimension.End.Column;
                 int numeroLinhas = worksheet.Dimension.End.Row;
 
-                for (int coluna = 1; coluna < numeroColunas; coluna++)
+                for (int coluna = 1; coluna < numeroColunas + 1; coluna++)
                 {
                     if (worksheet.Cells[1, coluna].Value.ToString() == columnName)
                     {

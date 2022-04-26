@@ -44,6 +44,12 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         // GET: Pessoas/Details/5
         public async Task<IActionResult> Details(string id)
         {
+            ViewBag.Usuario = HttpContext.User.Identity.Name;
+            if (HttpContext.User.IsInRole("admin"))
+                ViewBag.Role = "admin";
+            else
+                ViewBag.Role = "usuario";
+
             if (id == null)
             {
                 return NotFound();
@@ -62,6 +68,12 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         // GET: Pessoas/Create
         public IActionResult Create()
         {
+            ViewBag.Usuario = HttpContext.User.Identity.Name;
+            if (HttpContext.User.IsInRole("admin"))
+                ViewBag.Role = "admin";
+            else
+                ViewBag.Role = "usuario";
+
             return View();
         }
 
@@ -84,6 +96,12 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         // GET: Pessoas/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
+            ViewBag.Usuario = HttpContext.User.Identity.Name;
+            if (HttpContext.User.IsInRole("admin"))
+                ViewBag.Role = "admin";
+            else
+                ViewBag.Role = "usuario";
+
             if (id == null)
             {
                 return NotFound();
@@ -134,6 +152,12 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         // GET: Pessoas/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
+            ViewBag.Usuario = HttpContext.User.Identity.Name;
+            if (HttpContext.User.IsInRole("admin"))
+                ViewBag.Role = "admin";
+            else
+                ViewBag.Role = "usuario";
+
             if (id == null)
             {
                 return NotFound();

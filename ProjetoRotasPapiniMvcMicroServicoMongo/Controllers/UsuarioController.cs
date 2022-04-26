@@ -16,6 +16,28 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         // GET: Usuario
         public IActionResult Index()
         {
+            string user = "Anonymous";
+            bool authenticate = false;
+
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                user = HttpContext.User.Identity.Name;
+                authenticate = true;
+
+                if (HttpContext.User.IsInRole("admin"))
+                    ViewBag.Role = "admin";
+                else
+                    ViewBag.Role = "usuario";
+            }
+            else
+            {
+                user = "Não Logado";
+                authenticate = false;
+                ViewBag.Role = "";
+            }
+
+            ViewBag.Usuario = user;
+            ViewBag.Authenticate = authenticate;
             return View();
         }
 
@@ -60,7 +82,18 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Create()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Usuario usuario)
+        {
+            Servico.VerificaUsuario.GerarUsuario(usuario);
+            return RedirectToAction(nameof(Index));
+        }
 
 
 
