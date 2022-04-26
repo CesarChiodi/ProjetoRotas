@@ -4,7 +4,7 @@
 <p align="center">Informacoes Sobre o Projeto</p>
 </br>
 <p>
-  |-| MONGO (microServicos) // MVC bem BASICO (ASP.NET CORE Web App (Model-View-Controller)).
+  |-| MONGO (microServicos) // MVC (ASP.NET CORE Web App (Model-View-Controller)).
   </p>
   <p>
   |-| Principal: O projeto faz a leitura de um arquivo .XLS ESPECIFICO e tem o pre requisito que este esteja completo.
