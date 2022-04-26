@@ -90,7 +90,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
                             outraString = outraString + outro;
                         }
                        
-                        linha = "ROTAS" + DateTime.Now.ToShortDateString() + "\n" + $"\nSERVIÇO: {servico}" + $"\nTIME: {listaTimes[count]}, " + $"CIDADE: {cidade}" + $"\n{baseBase}" + $"\n{endereco}, {numero}   {cep}" + $"\n{bairro}, {complemento}" + $"\n{outraString}";
+                        linha = "ROTAS" + DateTime.Now.ToShortDateString() + $"\n\nSERVIÇO: {servico}" + $"\n\nTIME: {listaTimes[count]} " + $"\n\nCIDADE: {cidade}" + $"\n{baseBase}" + $"\n\n{endereco}, \n{numero}   {cep}" + $"\n\n{bairro}, \n{complemento}" + $"\n{outraString}\n_-_-_-";
 
                         count++;
                         if (count < listaTimes.Count - 1 && count == 21)
