@@ -35,13 +35,14 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
                 servicoParaCadaTime = 1;
             }
 
-            List<string> outrosObjetos = new();
+            List<string> outrosObjetos = new List<string>();
+
             string os = "", baseBase = "", cep = "", endereco = "", numero = "", bairro = "", complemento = "";
             int count = 0;
             int contTime = 0;
-            string path = caminhoRoot + "\\file\\RotasGeradas.docx";
+            string caminho = caminhoRoot + "\\file\\RotasGeradas.docx";
 
-            using (StreamWriter streamwriter = new StreamWriter(path, false, Encoding.GetEncoding("iso-8859-1")))
+            using (StreamWriter streamwriter = new StreamWriter(caminho, false, Encoding.GetEncoding("iso-8859-1")))
             {
                 foreach (var item in servicos)
                 {
@@ -91,7 +92,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
                             outraString = outraString + outro;
                         }
 
-                        linha = DateTime.Now.ToShortDateString() + "ROTAS: " + $"\n\nOS: {os}" + $"\n\nSERVIÇO: {servico}" + $"\n\nTIME: {listaTimes[contTime]} " + $"\n\nCIDADE: {cidade}" + $"\n{baseBase}" + $"\n\n{endereco}, \n{numero}   {cep}" + $"\n\n{bairro} \n{complemento}" + $"\n{outraString}\n_-_-_-\n";
+                        linha = DateTime.Now.ToShortDateString() + " ROTAS: " + $"\nOS: {os}" + $"\nSERVIÇO: {servico}" + $"\nTIME: {listaTimes[contTime]} " + $"\nCIDADE: {cidade}" + $"\n{baseBase}" + $"\n{endereco}\n{numero}\n{cep}" + $"\n{bairro}\n{complemento}" + $"\n{outraString}\n_-_-_-\n";
 
                         count++;
                         if (contTime < listaTimes.Count - 1 && count == servicoParaCadaTime)
@@ -103,7 +104,6 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
                         streamwriter.WriteLine(linha);
                     }
                 }
-
             }
         }
     }

@@ -10,34 +10,39 @@ using ProjetoRotasPapiniMvcMicroServicoMongo.Models;
 
 namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
 {
-        [Authorize]
+    [Authorize]
     public class TimesController : Controller
     {
         // GET: Times
         public async Task<IActionResult> Index()
         {
-            string user = "Anonymous";
-            bool authenticate = false;
+            string usuario = "Anonimo";
+            bool autenticacao = false;
 
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                user = HttpContext.User.Identity.Name;
-                authenticate = true;
+                usuario = HttpContext.User.Identity.Name;
+                autenticacao = true;
 
                 if (HttpContext.User.IsInRole("admin"))
+                {
                     ViewBag.Role = "admin";
+                }
                 else
+                {
                     ViewBag.Role = "usuario";
+                }
             }
             else
             {
-                user = "Não Logado";
-                authenticate = false;
+                usuario = "Não Logado";
+                autenticacao = false;
                 ViewBag.Role = "";
             }
 
-            ViewBag.Usuario = user;
-            ViewBag.Authenticate = authenticate;
+            ViewBag.Usuario = usuario;
+            ViewBag.Authenticate = autenticacao;
+
             return View(await Servico.VerificaTime.EncontraTodosTimes());
         }
 
@@ -46,9 +51,13 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         {
             ViewBag.Usuario = HttpContext.User.Identity.Name;
             if (HttpContext.User.IsInRole("admin"))
+            {
                 ViewBag.Role = "admin";
+            }
             else
+            {
                 ViewBag.Role = "usuario";
+            }
 
             if (id == null)
             {
@@ -69,9 +78,13 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         {
             ViewBag.Usuario = HttpContext.User.Identity.Name;
             if (HttpContext.User.IsInRole("admin"))
+            {
                 ViewBag.Role = "admin";
+            }
             else
+            {
                 ViewBag.Role = "usuario";
+            }
 
             List<Pessoa> pessoasCadastradas = await Servico.VerificaPessoa.EncontraTodasPessoa();
             List<Time> listaTimes = await Servico.VerificaTime.EncontraTodosTimes();
@@ -109,8 +122,6 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NomeTime")] Time time)
         {
-
-
             string cidade = Request.Form["Cidade"].ToString();
             time.Cidade = await Servico.VerificaCidade.EncontraCidadeUnica(cidade);
 
@@ -138,9 +149,13 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         {
             ViewBag.Usuario = HttpContext.User.Identity.Name;
             if (HttpContext.User.IsInRole("admin"))
+            {
                 ViewBag.Role = "admin";
+            }
             else
+            {
                 ViewBag.Role = "usuario";
+            }
 
             if (id == null)
             {
@@ -201,7 +216,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
             time.NomeTime = nomeTime;
 
             string cidade = Request.Form["Cidade"].ToString();
-            time.Cidade = await Servico.VerificaCidade.EncontraCidadeUnica(cidade); 
+            time.Cidade = await Servico.VerificaCidade.EncontraCidadeUnica(cidade);
 
             List<string> pessoa = Request.Form["Pessoa"].ToList();
             List<string> listaPessoasTime = Request.Form["PessoaTime"].ToList();
@@ -254,9 +269,13 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         {
             ViewBag.Usuario = HttpContext.User.Identity.Name;
             if (HttpContext.User.IsInRole("admin"))
+            {
                 ViewBag.Role = "admin";
+            }
             else
+            {
                 ViewBag.Role = "usuario";
+            }
 
             if (id == null)
             {

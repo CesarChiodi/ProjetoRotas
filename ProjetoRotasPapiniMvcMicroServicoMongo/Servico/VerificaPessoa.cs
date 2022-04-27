@@ -10,7 +10,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
 {
     public class VerificaPessoa
     {
-        public static async Task <List<Pessoa>> EncontraTodasPessoa()
+        public static async Task<List<Pessoa>> EncontraTodasPessoa()
         {
             HttpClient client = new HttpClient();
 
@@ -25,7 +25,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
                 return pessoa;
             }
             catch (HttpRequestException excecao)
-            { 
+            {
                 throw;
             }
         }

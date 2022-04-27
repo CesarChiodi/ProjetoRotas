@@ -9,10 +9,13 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
+
         [Required]
         public string NomeUsuario { get; set; }
+
         [Required]
         public string Email { get; set; }
+
         [Required]
         public string Senha { get; set; }
 

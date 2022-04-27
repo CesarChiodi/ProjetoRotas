@@ -16,28 +16,32 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         // GET: Cidades
         public async Task<IActionResult> Index()
         {
-            string user = "Anonymous";
-            bool authenticate = false;
+            string usuario = "Anonimo";
+            bool autenticacao = false;
 
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                user = HttpContext.User.Identity.Name;
-                authenticate = true;
+                usuario = HttpContext.User.Identity.Name;
+                autenticacao = true;
 
                 if (HttpContext.User.IsInRole("admin"))
+                {
                     ViewBag.Role = "admin";
+                }
                 else
+                {
                     ViewBag.Role = "usuario";
+                }
             }
             else
             {
-                user = "Não Logado";
-                authenticate = false;
+                usuario = "Não Logado";
+                autenticacao = false;
                 ViewBag.Role = "";
             }
 
-            ViewBag.Usuario = user;
-            ViewBag.Authenticate = authenticate;
+            ViewBag.Usuario = usuario;
+            ViewBag.Authenticate = autenticacao;
 
             return View(await Servico.VerificaCidade.EncontraTodasCidades());
         }
@@ -47,9 +51,13 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         {
             ViewBag.Usuario = HttpContext.User.Identity.Name;
             if (HttpContext.User.IsInRole("admin"))
+            {
                 ViewBag.Role = "admin";
+            }
             else
+            {
                 ViewBag.Role = "usuario";
+            }
 
             if (id == null)
             {
@@ -71,9 +79,13 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         {
             ViewBag.Usuario = HttpContext.User.Identity.Name;
             if (HttpContext.User.IsInRole("admin"))
+            {
                 ViewBag.Role = "admin";
+            }
             else
+            {
                 ViewBag.Role = "usuario";
+            }
 
             return View();
         }
@@ -98,17 +110,20 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         {
             ViewBag.Usuario = HttpContext.User.Identity.Name;
             if (HttpContext.User.IsInRole("admin"))
+            {
                 ViewBag.Role = "admin";
+            }
             else
+            {
                 ViewBag.Role = "usuario";
-
+            }
             if (id == null)
             {
                 return NotFound();
             }
 
             Cidade cidade = await Servico.VerificaCidade.EncontraCidadeUnica(id);
-            
+
             if (cidade == null)
             {
                 return NotFound();
@@ -156,9 +171,13 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         {
             ViewBag.Usuario = HttpContext.User.Identity.Name;
             if (HttpContext.User.IsInRole("admin"))
+            {
                 ViewBag.Role = "admin";
+            }
             else
+            {
                 ViewBag.Role = "usuario";
+            }
 
             if (id == null)
             {

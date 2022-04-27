@@ -20,13 +20,13 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         }
         public IActionResult Index()
         {
-            string user = "Anonymous";
-            bool authenticate = false;
+            string usuario = "Anonimo";
+            bool autenticacao = false;
 
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                user = HttpContext.User.Identity.Name;
-                authenticate = true;
+                usuario = HttpContext.User.Identity.Name;
+                autenticacao = true;
 
                 if (HttpContext.User.IsInRole("admin"))
                 {
@@ -41,23 +41,23 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
             }
             else
             {
-                user = "Não Logado";
-                authenticate = false;
+                usuario = "Não Logado";
+                autenticacao = false;
                 ViewBag.Role = "";
             }
 
-            ViewBag.Usuario = user;
-            ViewBag.Authenticate = authenticate;
+            ViewBag.Usuario = usuario;
+            ViewBag.Authenticate = autenticacao;
             ViewBag.Cabecalho = ReadFilePath.LerCabecalho(_appEnvironment.WebRootPath);
             return View();
         }
 
         public IActionResult EscolhaServico()
         {
-            var listaCabecalho = Request.Form["Column"].ToList();
-            List<string> servicos = new();
+            List<string> listaCabecalho = Request.Form["Column"].ToList();
+            List<string> servicos = new List<string>();
 
-            foreach (var cabecalho in listaCabecalho)
+            foreach (string cabecalho in listaCabecalho)
             {
                 if (cabecalho == "SERVIÇO" || cabecalho == "SERVICO")
                 {
@@ -72,10 +72,10 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
 
         public IActionResult EscolhaCidade(string servico)
         {
-            List<string> listaCidades = new();
+            List<string> listaCidades = new List<string>();
             List<string> cabecalhoEscolhido = Request.Form["cabecalho"].ToList();
 
-            foreach (var cabecalho in cabecalhoEscolhido)
+            foreach (string cabecalho in cabecalhoEscolhido)
             {
                 if (cabecalho == "CIDADE")
                 {
@@ -92,14 +92,16 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
 
         public async Task<IActionResult> EscolhaTime(string cidade)
         {
-            var cabecalhoEscolhido = Request.Form["cabecalho"].ToList();
-            var servicoEscolhido = Request.Form["servico"].ToString();
+            List<string> cabecalhoEscolhido = Request.Form["cabecalho"].ToList();
+            string servicoEscolhido = Request.Form["servico"].ToString();
             cidade = Request.Form["cidade"].ToString();
-            var listaTimes = await VerificaTime.EncontraTodosTimes();
-            List<Time> timeCidade = new List<Time>();
-            var servico = servicoEscolhido.Replace(",", "");
 
-            foreach (var time in listaTimes)
+            List<Time> listaTimes = await VerificaTime.EncontraTodosTimes();
+            List<Time> timeCidade = new List<Time>();
+
+            string servico = servicoEscolhido.Replace(",", "");
+
+            foreach (Time time in listaTimes)
             {
                 if (time.Cidade.NomeCidade == cidade)
                 {
@@ -115,7 +117,6 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
             return View();
         }
 
-
         //public IActionResult EscreverWord()
         //{
         //    List<string> cabecalho = Request.Form["Coluna"].ToList();
@@ -128,17 +129,15 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         //    return RedirectToAction("ListaServicos");
         //}
 
-
         public IActionResult GerarEscritaWord()
         {
-            var cabecalhoEscolhido = Request.Form["cabecalho"].ToList();
-            var servicoEscolhido = Request.Form["servico"].ToString();
-            var cidadeEscolhida = Request.Form["cidade"].ToString();
-            var listaTimes = Request.Form["time"].ToList();
+            List<string> cabecalhoEscolhido = Request.Form["cabecalho"].ToList();
+            string servicoEscolhido = Request.Form["servico"].ToString();
+            string cidadeEscolhida = Request.Form["cidade"].ToString();
+            List<string> listaTimes = Request.Form["time"].ToList();
 
-            var servico = servicoEscolhido.Replace(",", "");
-
-            var cidade = cidadeEscolhida.Replace(",", "");
+            string servico = servicoEscolhido.Replace(",", "");
+            string cidade = cidadeEscolhida.Replace(",", "");
 
             new EscreverFilePath().EscreverWord(cabecalhoEscolhido, listaTimes, servico, cidade, _appEnvironment.WebRootPath);
             return View();
@@ -146,10 +145,12 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
 
         public FileResult Download()
         {
-            var folder = _appEnvironment.WebRootPath + "\\file\\";
-            var pathFinal = folder + "RotasGeradas.docx";
-            byte[] bytes = System.IO.File.ReadAllBytes(pathFinal);
+            string pastaArquivo = _appEnvironment.WebRootPath + "\\file\\";
+            string arquivoPronto = pastaArquivo + "RotasGeradas.docx";
+
+            byte[] bytes = System.IO.File.ReadAllBytes(arquivoPronto);
             string contentType = "application/octet-stream";
+
             return File(bytes, contentType, "RotasGeradas.docx");
         }
     }

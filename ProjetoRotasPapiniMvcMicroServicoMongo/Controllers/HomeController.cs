@@ -26,37 +26,43 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
 
         public async Task<IActionResult> Index()
         {
-            string user = "Anonymous";
-            bool authenticate = false;
+            string usuarioId = "Anonimo";
+            bool autenticacao = false;
 
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                user = HttpContext.User.Identity.Name;
-                authenticate = true;
+                usuarioId = HttpContext.User.Identity.Name;
+                autenticacao = true;
 
                 if (HttpContext.User.IsInRole("admin"))
+                {
                     ViewBag.Role = "admin";
+                }
                 else
+                {
                     ViewBag.Role = "usuario";
+                }
             }
             else
             {
-                user = "Não Logado";
-                authenticate = false;
+                usuarioId = "Não Logado";
+                autenticacao = false;
                 ViewBag.Role = "";
             }
 
-            ViewBag.Usuario = user;
-            ViewBag.Authenticate = authenticate;
-            var usuario = await Servico.VerificaUsuario.EncontraTodosUsuarios();
-            if(usuario.Count < 1)
+            ViewBag.Usuario = usuarioId;
+            ViewBag.Authenticate = autenticacao;
+            List<Usuario> listaUsuario = await Servico.VerificaUsuario.EncontraTodosUsuarios();
+            if (listaUsuario.Count < 1)
             {
-                Servico.VerificaUsuario.GerarUsuario(new Usuario { NomeUsuario = "admin", Senha = "admin",  Role = "admin" });
+                Servico.VerificaUsuario.GerarUsuario(new Usuario { NomeUsuario = "admin", Senha = "admin", Role = "admin" });
                 ViewBag.Usuario = "admin";
-                ViewBag.Role="admin";
+                ViewBag.Role = "admin";
                 ViewBag.Authenticate = true;
+
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
+
             return View();
         }
 
@@ -73,28 +79,33 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
 
         public IActionResult ReceberArquivo()
         {
-            string user = "Anonymous";
-            bool authenticate = false;
+            string usuario = "Anonimo";
+            bool autenticacao = false;
 
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                user = HttpContext.User.Identity.Name;
-                authenticate = true;
+                usuario = HttpContext.User.Identity.Name;
+                autenticacao = true;
 
                 if (HttpContext.User.IsInRole("admin"))
+                {
                     ViewBag.Role = "admin";
+                }
                 else
+                {
                     ViewBag.Role = "usuario";
+                }
             }
             else
             {
-                user = "Não Logado";
-                authenticate = false;
+                usuario = "Não Logado";
+                autenticacao = false;
                 ViewBag.Role = "";
             }
 
-            ViewBag.Usuario = user;
-            ViewBag.Authenticate = authenticate;
+            ViewBag.Usuario = usuario;
+            ViewBag.Authenticate = autenticacao;
+
             return View();
         }
 
@@ -106,11 +117,11 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
             {
                 string wwwRootPath = _hostEnvironment.WebRootPath;
                 string nomeArquivo = Path.GetFileNameWithoutExtension(arquivo.File.FileName);
-                string extension = Path.GetExtension(arquivo.File.FileName);
-                arquivo.FileName = nomeArquivo = nomeArquivo + extension;
+                string estensao = Path.GetExtension(arquivo.File.FileName);
+                arquivo.FileName = nomeArquivo = nomeArquivo + estensao;
                 string path = Path.Combine(wwwRootPath + "/file", nomeArquivo);
 
-                using (var fileStream = new FileStream(path, FileMode.Create))
+                using (FileStream fileStream = new FileStream(path, FileMode.Create))
                 {
                     await arquivo.File.CopyToAsync(fileStream);
                 }

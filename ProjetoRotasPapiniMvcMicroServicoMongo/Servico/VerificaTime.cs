@@ -55,7 +55,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
 
             try
             {
-                var json = JsonConvert.SerializeObject(timeModificacao);
+                string json = JsonConvert.SerializeObject(timeModificacao);
 
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync("https://localhost:44389/api/Time/", content);
@@ -73,7 +73,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
 
             try
             {
-                var json = JsonConvert.SerializeObject(timeModificacao);
+                string json = JsonConvert.SerializeObject(timeModificacao);
 
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PutAsync("https://localhost:44389/api/Time/" + id, content);

@@ -10,34 +10,39 @@ using ProjetoRotasPapiniMvcMicroServicoMongo.Models;
 
 namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
 {
-    
+
     public class UsuarioController : Controller
     {
         // GET: Usuario
         public IActionResult Index()
         {
-            string user = "Anonymous";
-            bool authenticate = false;
+            string usuario = "Anonimo";
+            bool autenticacao = false;
 
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                user = HttpContext.User.Identity.Name;
-                authenticate = true;
+                usuario = HttpContext.User.Identity.Name;
+                autenticacao = true;
 
                 if (HttpContext.User.IsInRole("admin"))
+                {
                     ViewBag.Role = "admin";
+                }
                 else
+                {
                     ViewBag.Role = "usuario";
+                }
             }
             else
             {
-                user = "Não Logado";
-                authenticate = false;
+                usuario = "Não Logado";
+                autenticacao = false;
                 ViewBag.Role = "";
             }
 
-            ViewBag.Usuario = user;
-            ViewBag.Authenticate = authenticate;
+            ViewBag.Usuario = usuario;
+            ViewBag.Authenticate = autenticacao;
+
             return View();
         }
 
@@ -45,7 +50,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(Usuario usuario)
         {
-            var usuarioBuscado = await Servico.VerificaUsuario.EncontraNomeUsuario(usuario.NomeUsuario);
+            Usuario usuarioBuscado = await Servico.VerificaUsuario.EncontraNomeUsuario(usuario.NomeUsuario);
 
             if (ModelState.IsValid)
             {
@@ -53,21 +58,24 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            if(usuarioBuscado != null && usuario.Senha == usuarioBuscado.Senha)
+            if (usuarioBuscado != null && usuario.Senha == usuarioBuscado.Senha)
             {
-                List<Claim> userClaims = new()
+                List<Claim> listaUsuariosClaims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Name, usuarioBuscado.NomeUsuario),
                     new Claim("Role", usuarioBuscado.Role),
                     new Claim(ClaimTypes.Role, usuarioBuscado.Role),
                 };
 
-                var myIdentity = new ClaimsIdentity(userClaims, "Usuario");
-                var userPrincipal = new ClaimsPrincipal(new[] { myIdentity });
+                ClaimsIdentity identity = new ClaimsIdentity(listaUsuariosClaims, "Usuario");
+                ClaimsPrincipal usuarioPrincipal = new ClaimsPrincipal(new[] { identity });
 
-                await HttpContext.SignInAsync(userPrincipal);
+                await HttpContext.SignInAsync(usuarioPrincipal);
 
-                TempData["success"] = "Usuário logado!";
+                ////
+                /**/
+                TempData["success"] = "Usuário logado!";//
+                                                        ////
 
                 return RedirectToRoute(new { controller = "RotaReadFilePath", action = "Index" });
             }

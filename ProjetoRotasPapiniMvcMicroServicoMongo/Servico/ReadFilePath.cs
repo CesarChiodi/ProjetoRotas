@@ -23,12 +23,13 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
                     cabecalho.Add(worksheet?.Cells[Row: 1, coluna]?.Value?.ToString());
                 }
             }
+
             return cabecalho;
         }
 
         public static List<IDictionary<string, string>> LerArquivoXls(List<string> columns, string caminhoWebRoot)
         {
-            List<string> plan = new List<string>();
+            List<string> planilhareferencia = new List<string>();
             List<IDictionary<string, string>> listDictonary = new();
 
             FileInfo arquivoXls = new FileInfo(caminhoWebRoot + "\\file\\referencia.xlsx");
