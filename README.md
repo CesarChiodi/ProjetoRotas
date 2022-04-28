@@ -21,4 +21,4 @@
   |-| Exemplo do .XML: [Gerador de Rotas.xlsx](https://github.com/CesarChiodi/RotasPapini/files/8505637/Gerador.de.Rotas.xlsx)
 </p>
 
-pontos fracos: ordenar por cep, equipes divididas igualmente e escrita no word
+
