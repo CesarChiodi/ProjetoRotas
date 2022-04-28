@@ -49,7 +49,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
                 {
                     data = new Dictionary<string, string>();
 
-                    for (int col = 1; col < numeroColunas; col++)
+                    for (int col = 1; col < numeroColunas +1; col++)
                     {
                         columns.ForEach(coluna =>
                         {

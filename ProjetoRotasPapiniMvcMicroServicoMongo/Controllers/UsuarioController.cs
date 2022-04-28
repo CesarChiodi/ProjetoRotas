@@ -72,10 +72,6 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
 
                 await HttpContext.SignInAsync(usuarioPrincipal);
 
-                ////
-                /**/
-                TempData["success"] = "Usuário logado!";//
-                                                        ////
 
                 return RedirectToRoute(new { controller = "RotaReadFilePath", action = "Index" });
             }

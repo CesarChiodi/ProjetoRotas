@@ -3,6 +3,7 @@
 }
 
 <h1>Rotas do Relatorio</h1>
+<h2>Escolha abaixo as rotas necessarias para a escrita do relatorio</h2>
 @if (!ViewBag.Authenticate)
 {
 	<div class="row">
@@ -28,7 +29,7 @@ else
 				@{
 					foreach (var column in ViewBag.Cabecalho)
 					{
-							<input type="checkbox" id="Column" name="Column" value=@column>
+							<input type="checkbox" value="@column" for="@column" id="Column" name="Column" >
 							<label for="@column">@column</label>
 							<br/>
 					}
