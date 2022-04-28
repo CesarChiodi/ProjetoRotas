@@ -91,6 +91,7 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Servico
 
             try
             {
+               
                 string json = JsonConvert.SerializeObject(cidadeModificacao);
 
                 var content = new StringContent(json, Encoding.UTF8, "application/json");

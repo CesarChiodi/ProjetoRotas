@@ -35,7 +35,7 @@ namespace MicroServicoPessoa.Controllers
             return pessoa;
         }
 
-        [HttpGet("nomePessoa/{nomePessoa}")]
+        [HttpGet("nomePessoa/{nome}")]
         public ActionResult<Pessoa> GetNomePessoa(string nome)
         {
             var pessoa = _pessoa.GetNomePessoa(nome);

@@ -26,26 +26,7 @@ namespace MicroServicoTime.Servico
         public Time GetNomeTime(string nome) =>
             _time.Find(time => time.NomeTime == nome).FirstOrDefault();
 
-        //public async Task<Cidade> GetNomeCidadeEstado(string nomeCidade, string estado)
-        //{
-        //    HttpClient client = new HttpClient();
-
-        //    try
-        //    {
-        //        HttpResponseMessage response = await client.GetAsync("https://localhost:44346/api/Cidade/nomeCidade/" + nomeCidade + "/estado/" + estado);
-        //        response.EnsureSuccessStatusCode();
-        //        string responseBody = await response.Content.ReadAsStringAsync();
-        //        Cidade cidade = JsonConvert.DeserializeObject<Cidade>(responseBody);
-
-        //        return cidade;
-        //    }
-        //    catch (HttpRequestException excecao)
-        //    {
-        //        return null;
-        //    }
-        //    //_cidade.Find(cidade => cidade.Id == nomeCidade).FirstOrDefault();
-        //}
-
+      
         public async Task<Time> Create(Time time)
         {
             if (GetNomeTime(time.NomeTime) != null)
@@ -69,7 +50,7 @@ namespace MicroServicoTime.Servico
 
             foreach (var pessoaTimeId in time.PessoaTime)
             {
-                var pessoaTime = await VerificaPessoa.GetPessoaId(pessoaTimeId.Id);
+                var pessoaTime = await VerificaPessoa.GetPessoaNome(pessoaTimeId.NomePessoa);
 
                 if (pessoaTime == null)
                 {
@@ -99,7 +80,7 @@ namespace MicroServicoTime.Servico
 
         public async Task<Time> Update(string id, Time timeModificacao)
         {
-            var cidade = await VerificaCidade.GetNomeCidadeEstado(timeModificacao.Cidade.Id, timeModificacao.Cidade.Estado);
+            var cidade = await VerificaCidade.GetCidadeId(timeModificacao.Cidade.Id);
 
             if (cidade == null)
             {

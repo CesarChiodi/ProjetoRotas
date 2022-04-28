@@ -137,18 +137,13 @@ namespace ProjetoRotasPapiniMvcMicroServicoMongo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("NomeCidade,Estado")] Cidade cidade)
+        public async Task<IActionResult> Edit(Cidade cidade)
         {
-            if (id != cidade.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    Servico.VerificaCidade.AtualizarCidade(id, cidade);
+                    Servico.VerificaCidade.AtualizarCidade(cidade.Id, cidade);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
