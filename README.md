@@ -31,6 +31,12 @@
   [referencia.xlsx](https://github.com/CesarChiodi/ProjetoRotasPapiniMvcMicroServicoMongo/files/8578780/referencia.xlsx)
 </p>
 <p>
+  |-| Exemplo do .DOCX gerado: [RotasGeradas (5).docx](https://github.com/CesarChiodi/ProjetoRotasPapiniMvcMicroServicoMongo/files/8579309/RotasGeradas.5.docx)
+
+  </br></br>
+  [referencia.xlsx](https://github.com/CesarChiodi/ProjetoRotasPapiniMvcMicroServicoMongo/files/8578780/referencia.xlsx)
+</p>
+<p>
   |-| PONTO IMPORTANTE: A ESTETICA DO PROJETO (front e escrita do arquivo) NAO DEVE SER LEVADA EM CONSIDERACAO.
   </p>
 
