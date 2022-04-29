@@ -27,16 +27,17 @@
 </p>
 <p>
   |-| Exemplo do .XLS: a planilha para funcionar deve ser registrada respectivamente com o nome: referencia (ASSIM COMO O EXEMPLO ABAIXO):
-  </br></br>
+  </br>
   [referencia.xlsx](https://github.com/CesarChiodi/ProjetoRotasPapiniMvcMicroServicoMongo/files/8578780/referencia.xlsx)
 </p>
 <p>
   |-| Exemplo do .DOCX gerado: [RotasGeradas (5).docx](https://github.com/CesarChiodi/ProjetoRotasPapiniMvcMicroServicoMongo/files/8579309/RotasGeradas.5.docx)
 
-  </br></br>
-  [referencia.xlsx](https://github.com/CesarChiodi/ProjetoRotasPapiniMvcMicroServicoMongo/files/8578780/referencia.xlsx)
-</p>
+  </br>
 <p>
   |-| PONTO IMPORTANTE: A ESTETICA DO PROJETO (front e escrita do arquivo) NAO DEVE SER LEVADA EM CONSIDERACAO.
+  </p>
+  <p>
+  |-| ARQUITETURA DO PROJETO: [Rotas (1).docx](https://github.com/CesarChiodi/ProjetoRotas/files/8592358/Rotas.1.docx)
   </p>
 
